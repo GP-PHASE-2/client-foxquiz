@@ -1,0 +1,574 @@
+.lobby-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+}
+
+.lobby-content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.lobby-card {
+  width: 100%;
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  color: var(--text-primary);
+}
+
+.lobby-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
+
+.lobby-header h1 {
+  font-size: 2.5rem;
+  margin: 0;
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary), var(--accent-primary));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s linear infinite;
+  text-shadow: 0 0 10px rgba(255, 204, 51, 0.3), 0 0 20px rgba(255, 204, 51, 0.2);
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.players-section h2, .game-settings h2, .chat-section h2 {
+  margin-top: 0;
+  color: var(--accent-primary);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--bg-tertiary);
+  padding-bottom: 0.5rem;
+  text-shadow: 0 0 5px rgba(255, 204, 51, 0.3);
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px rgba(255, 204, 51, 0.3);
+  }
+  to {
+    text-shadow: 0 0 8px rgba(255, 204, 51, 0.5), 0 0 12px rgba(255, 204, 51, 0.3);
+  }
+}
+
+.room-code {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-tertiary);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+}
+
+.room-code strong {
+  color: var(--accent-primary);
+  margin-left: 0.5rem;
+}
+
+.copy-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: transform 0.2s;
+}
+
+.copy-btn:hover {
+  transform: scale(1.1);
+}
+
+.lobby-inner-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.players-section, .game-settings, .chat-section {
+  background-color: var(--bg-tertiary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.players-section h2, .game-settings h2, .chat-section h2 {
+  margin-top: 0;
+  color: var(--accent-primary);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--bg-tertiary);
+  padding-bottom: 0.5rem;
+}
+
+.players-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.player-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 1rem;
+  transition: transform 0.2s;
+}
+
+.player-card:hover {
+  transform: translateY(-5px);
+}
+
+.player-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+  border: 2px solid #2a3b8f;
+}
+
+.player-name {
+  font-weight: 500;
+  text-align: center;
+  word-break: break-word;
+  color: #333;
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #555;
+}
+
+/* Update the form-group select styling to remove yellow triangles */
+.form-group select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--accent-primary);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  /* Custom dropdown arrow without yellow triangles */
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23ffffff' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.7em top 50%;
+  background-size: 1.2em auto;
+  padding-right: 2rem;
+}
+
+/* Theme-specific select styling */
+body.theme-dark .form-group select {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+  /* White dropdown arrow for dark theme */
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23ffffff' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+}
+
+body.theme-light .form-group select {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-secondary);
+  border-color: var(--accent-primary);
+  /* Dark dropdown arrow for light theme */
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23333333' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+}
+
+/* Remove any decorative elements that might be creating the yellow triangles */
+.form-group select::before,
+.form-group select::after {
+  display: none;
+}
+
+/* Remove any potential pseudo-elements on parent containers */
+.game-settings::before,
+.game-settings::after {
+  content: none;
+}
+
+.form-group select option {
+  background-color: #fff;
+  color: #333;
+  padding: 0.5rem;
+}
+
+.form-group select:focus {
+  outline: 2px solid #2a3b8f;
+  z-index: 100;
+}
+
+.chat-section {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-messages {
+  flex: 1;
+  min-height: 200px;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.chat-message {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background-color: var(--bg-tertiary);
+  word-break: break-word;
+  color: var(--text-primary);
+}
+
+.own-message {
+  background-color: rgba(42, 59, 143, 0.2);
+  align-self: flex-end;
+}
+
+.message-sender {
+  font-weight: bold;
+  margin-right: 0.5rem;
+  color: var(--accent-primary);
+}
+
+.chat-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chat-form input {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--bg-tertiary);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.chat-form input:focus {
+  outline: 2px solid #2a3b8f;
+}
+
+.chat-form button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #2a3b8f;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.chat-form button:hover {
+  background-color: #1a2b7f;
+}
+
+.lobby-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  background-color: var(--bg-tertiary);
+  gap: 1rem;
+  border-top: 1px solid var(--bg-tertiary);
+}
+
+.start-game-btn {
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  flex: 1;
+}
+
+.start-game-btn:hover:not(:disabled) {
+  background-color: #3e8e41;
+}
+
+.start-game-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.leave-btn {
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #f44336;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.leave-btn:hover {
+  background-color: #d32f2f;
+}
+
+.waiting-message {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-style: italic;
+  color: #555;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.loading-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+}
+
+.loading-message button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #2a3b8f;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .lobby-inner-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .chat-section {
+    grid-column: span 1;
+  }
+  
+  .lobby-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .room-code {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 480px) {
+  .lobby-card {
+    width: 95%;
+  }
+  
+  .lobby-header h1 {
+    font-size: 2rem;
+  }
+  
+  .lobby-inner-content {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .lobby-footer {
+    flex-direction: column;
+  }
+}
+
+/* Tambahkan kode berikut di bagian bawah file */
+
+/* Styling untuk chat pada mode dark */
+body.theme-dark .message-sender {
+  color: var(--accent-primary); /* Menggunakan warna accent-primary (#ffcc33) yang sama dengan judul */
+  font-weight: bold;
+}
+
+body.theme-dark .chat-message {
+  background-color: rgba(0, 0, 0, 0.3); /* Background lebih gelap untuk pesan */
+  color: #fff; /* Warna teks pesan menjadi putih */
+}
+
+body.theme-dark .own-message {
+  background-color: rgba(255, 204, 51, 0.2); /* Background untuk pesan sendiri dengan warna accent */
+}
+
+body.theme-dark .chat-form input {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+body.theme-dark .chat-form input:focus {
+  outline: 2px solid var(--accent-primary);
+}
+
+body.theme-dark .chat-form button {
+  background-color: var(--accent-primary);
+  color: #000;
+}
+
+body.theme-dark .chat-form button:hover {
+  background-color: var(--accent-secondary);
+}
+
+/* Styling untuk lobby footer pada mode dark */
+body.theme-dark .lobby-footer {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Futuristic Game Settings - Responsive to Theme */
+.game-settings {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+  border: 1px solid var(--accent-primary);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(5px);
+  animation: pulse 4s infinite alternate;
+}
+
+/* Theme-specific styling */
+body.theme-dark .game-settings {
+  background: linear-gradient(135deg, rgba(20, 20, 40, 0.8), rgba(10, 10, 30, 0.9));
+  box-shadow: 0 0 20px rgba(var(--accent-primary), 0.2), inset 0 0 20px rgba(var(--accent-primary), 0.05);
+}
+
+body.theme-light .game-settings {
+  background: linear-gradient(135deg, rgba(42, 59, 143, 0.8), rgba(41, 83, 155, 0.9));
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 20px rgba(var(--accent-primary), 0.2); }
+  100% { box-shadow: 0 0 30px rgba(var(--accent-primary), 0.4); }
+}
+
+.game-settings::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: rotate(45deg);
+  animation: shine-effect 6s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.game-settings h2 {
+  color: var(--accent-primary);
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 10px rgba(255, 204, 51, 0.3);
+  letter-spacing: 2px;
+  position: relative;
+  border-bottom: none;
+  padding-bottom: 0.75rem;
+}
+
+.game-settings h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--accent-primary), transparent);
+}
+
+.settings-form {
+  position: relative;
+  z-index: 2;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.form-group label {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Theme-specific label styling */
+body.theme-dark .form-group label {
+  color: var(--accent-primary);
+  text-shadow: 0 0 5px rgba(255, 204, 51, 0.2);
+}
+
+body.theme-light .form-group label {
+  color: var(--text-secondary);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
