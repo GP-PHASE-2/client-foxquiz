@@ -20,7 +20,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchAvatars = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL || 'http://localhost:3000'}/api/avatars`);
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL || 'https://gp-phase2.rahmadamri.site'}/api/avatars`);
         setAvailableAvatars(response.data);
         if (response.data.length > 0) {
           setSelectedAvatar(response.data[0]);

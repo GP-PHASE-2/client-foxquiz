@@ -33,7 +33,7 @@ export const GameProvider = ({ children }) => {
     }
 
     console.log('Creating new socket connection');
-    const newSocket = io(import.meta.env.VITE_SERVER_URL || 'http://localhost:3000', {
+    const newSocket = io(import.meta.env.VITE_SERVER_URL || 'https://gp-phase2.rahmadamri.site', {
       reconnection: true,
       reconnectionAttempts: 5,
       reconnectionDelay: 1000,
