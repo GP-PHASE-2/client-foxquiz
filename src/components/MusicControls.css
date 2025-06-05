@@ -1,0 +1,69 @@
+.music-controls {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.music-controls.collapsed {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.toggle-expand {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+  color: white;
+}
+
+.toggle-expand:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.music-toggle,
+.mute-toggle {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+  color: white;
+}
+
+.music-toggle:hover,
+.mute-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.volume-slider {
+  width: 80px;
+  height: 5px;
+  background: #ddd;
+  outline: none;
+  border-radius: 5px;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+}
