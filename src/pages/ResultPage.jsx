@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'; // Add React and useEffect import
-import { useParams, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { useGame } from '../contexts/useGame';
 import '../styles/ResultPage.css';
 
 const ResultPage = () => {
-  const { roomCode } = useParams();
   const navigate = useNavigate();
   const {
     room,
@@ -47,9 +46,8 @@ const ResultPage = () => {
         navigate('/');
       }
     }, 500);
-    
-    return () => clearTimeout(redirectTimer);
-  }, [room, gameState, navigate]);
+      return () => clearTimeout(redirectTimer);
+  }, [room, gameState, navigate, players]);
   
   // Add handlePlayAgain function
   const handlePlayAgain = () => {
@@ -93,16 +91,8 @@ const ResultPage = () => {
           <div className="winner-section">
             {sortedPlayers.length > 0 && (
               <>
-                <div className="winner-crown">👑</div>
-                <div className="winner-avatar">
-                  <img 
-                    src={sortedPlayers[0].avatar} 
-                    alt={`${sortedPlayers[0].username}'s avatar`} 
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = `https://api.dicebear.com/6.x/bottts/svg?seed=${sortedPlayers[0].username}`;
-                    }}
-                  />
+                <div className="winner-crown">👑</div>                <div className="winner-avatar">
+                  <img src={sortedPlayers[0].avatar} alt="Winner Avatar" />
                 </div>
                 <h2 className="winner-name">{sortedPlayers[0].username}</h2>
                 <p className="winner-score">{sortedPlayers[0].score} points</p>
@@ -120,17 +110,20 @@ const ResultPage = () => {
                     className={`leaderboard-item ${p.id === currentPlayer?.id ? 'current-player' : ''}`}
                     style={{"--rank": index}}
                   >
-                    <div className="rank">{index + 1}</div>
-                    <div className="player-info">
-                      <img 
-                        src={p.avatar} 
-                        alt={`${p.username}'s avatar`} 
-                        className="player-avatar" 
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = `https://api.dicebear.com/6.x/bottts/svg?seed=${p.username}`;
-                        }}
-                      />
+                    <div className="rank">{index + 1}</div>                    <div className="player-info">
+                      <div className="player-avatar">
+                        <img 
+                          src={p.avatar || '/avatar1.svg'} 
+                          alt={`${p.username}'s avatar`} 
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            // Fallback ke avatar lokal jika gagal
+                            const fallbackAvatars = ['/avatar1.svg', '/avatar2.svg', '/avatar3.svg', '/avatar4.svg', '/avatar5.svg', '/avatar6.svg'];
+                            const randomIndex = Math.floor(Math.random() * fallbackAvatars.length);
+                            e.target.src = fallbackAvatars[randomIndex];
+                          }}
+                        />
+                      </div>
                       <span className="player-name" style={{color:'orange'}}>{p.username}</span>
                     </div>
                     <div className="score">{p.score} pts</div>

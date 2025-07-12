@@ -1,14 +1,12 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import {  useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useGame } from '../contexts/useGame'; // Ubah import ini
 import '../styles/GamePage.css'; // You'll need to create this CSS file
 
 const GamePage = () => {
-  const { roomCode } = useParams();
   const navigate = useNavigate();
   const {
     room,
-    player,
     players,
     gameState,
     currentQuestion,
@@ -127,7 +125,7 @@ const GamePage = () => {
                     </button>
                   );
                 })
-              : Object.entries(currentQuestion.options).map(([key, value], index) => {
+              : Object.entries(currentQuestion.options).map(([key, value]) => {
                   let answerClass = "answer-option";
                   
                   if (answerResult) {
@@ -158,20 +156,21 @@ const GamePage = () => {
         )}
       </div>
 
-      <div className="game-footer">
-        <div className="players-scores">
+      <div className="game-footer">        <div className="players-scores">
           {players.map((p) => (
-            <div key={p.id} className="player-score">
-              {/* Add error handling and fallback for avatar */}
-              <img 
-                src={p.avatar || `https://api.dicebear.com/6.x/bottts/svg?seed=${p.username}`} 
-                alt={`${p.username}'s avatar`} 
-                className="player-avatar" 
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = `https://api.dicebear.com/6.x/bottts/svg?seed=${p.username}`;
-                }}
-              />
+            <div key={p.id} className="player-score">              <div className="player-avatar">
+                <img 
+                  src={p.avatar || '/avatar1.svg'} 
+                  alt={`${p.username}'s avatar`} 
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    // Fallback ke avatar lokal jika gagal
+                    const fallbackAvatars = ['/avatar1.svg', '/avatar2.svg', '/avatar3.svg', '/avatar4.svg', '/avatar5.svg', '/avatar6.svg'];
+                    const randomIndex = Math.floor(Math.random() * fallbackAvatars.length);
+                    e.target.src = fallbackAvatars[randomIndex];
+                  }}
+                />
+              </div>
               <span className="player-name" style={{color:'yellow'}}>{p.username}</span>
               <span className="player-points">{p.score || 0} pts</span>
             </div>
