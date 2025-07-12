@@ -20,24 +20,20 @@ const HomePage = () => {
   useEffect(() => {
     const fetchAvatars = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL || 'https://gp-phase2.rahmadamri.site'}/api/avatars`);
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL || 'https://quiz.diotaufiq.site'}/api/avatars`);
         setAvailableAvatars(response.data);
         if (response.data.length > 0) {
           setSelectedAvatar(response.data[0]);
-        }
-      } catch (err) {
+        }      } catch (err) {
         console.error('Error fetching avatars:', err);
         // Fallback avatars if API fails
-        // Update the fallback avatars with proper image URLs
         const fallbackAvatars = [
-          'https://api.dicebear.com/7.x/bottts/svg?seed=1',
-          'https://api.dicebear.com/7.x/bottts/svg?seed=2',
-          'https://api.dicebear.com/7.x/bottts/svg?seed=3',
-          'https://api.dicebear.com/7.x/bottts/svg?seed=4',
-          'https://api.dicebear.com/7.x/bottts/svg?seed=5',
-          'https://api.dicebear.com/7.x/bottts/svg?seed=6',
-          'https://api.dicebear.com/7.x/bottts/svg?seed=7',
-          'https://api.dicebear.com/7.x/bottts/svg?seed=8'
+          '/avatar1.svg',
+          '/avatar2.svg',
+          '/avatar3.svg',
+          '/avatar4.svg',
+          '/avatar5.svg',
+          '/avatar6.svg'
         ];
         setAvailableAvatars(fallbackAvatars);
         setSelectedAvatar(fallbackAvatars[0]);
@@ -137,11 +133,9 @@ const HomePage = () => {
               />
             </div>
           )}
-          
-          <div className="form-group">
+            <div className="form-group">
             <label>Select Your Avatar</label>
-            <div className="avatar-grid">
-              {availableAvatars.map((avatar, index) => (
+            <div className="avatar-grid">              {availableAvatars.map((avatar, index) => (
                 <div 
                   key={index}
                   className={`avatar-option ${selectedAvatar === avatar ? 'selected' : ''}`}
@@ -152,7 +146,10 @@ const HomePage = () => {
                     alt={`Avatar ${index + 1}`} 
                     onError={(e) => {
                       e.target.onerror = null;
-                      e.target.src = `https://api.dicebear.com/7.x/bottts/svg?seed=${index+1}`;
+                      // Fallback ke avatar lokal jika gagal
+                      const fallbackAvatars = ['/avatar1.svg', '/avatar2.svg', '/avatar3.svg', '/avatar4.svg', '/avatar5.svg', '/avatar6.svg'];
+                      const randomIndex = Math.floor(Math.random() * fallbackAvatars.length);
+                      e.target.src = fallbackAvatars[randomIndex];
                     }}
                   />
                 </div>
