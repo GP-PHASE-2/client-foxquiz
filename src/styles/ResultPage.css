@@ -54,6 +54,12 @@
 .player-avatar {
   width: 35px; /* Reduced from 40px */
   height: 35px; /* Reduced from 40px */
+  border-radius: 50%;
+  border: 2px solid #ffcc33;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
 }
 
 .results-footer {
@@ -154,9 +160,24 @@
   height: 120px;
   border-radius: 50%;
   border: 4px solid var(--accent-primary);
-  overflow: hidden;
   margin-bottom: 1rem;
   box-shadow: 0 0 20px rgba(255, 204, 51, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+}
+
+.winner-avatar .avatar-emoji {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.winner-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .winner-avatar img {
@@ -296,10 +317,26 @@
 }
 
 .player-avatar {
-  width: 40px;
-  height: 40px;
+  width: 35px; /* Reduced from 40px */
+  height: 35px; /* Reduced from 40px */
   border-radius: 50%;
   border: 2px solid #ffcc33;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+}
+
+.player-avatar .avatar-emoji {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.player-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .score {

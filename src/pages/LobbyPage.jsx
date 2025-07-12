@@ -101,10 +101,20 @@ const LobbyPage = () => {
           <div className="lobby-inner-content">
             <div className="players-section">
               <h2>Players ({players.length})</h2>
-              <div className="players-list">
-                {players.map((p) => (
-                  <div key={p.id} className="player-card">
-                    <img src={p.avatar} alt={`${p.username}'s avatar`} className="player-avatar" />
+              <div className="players-list">                {players.map((p) => (                  <div key={p.id} className="player-card">
+                    <div className="player-avatar">
+                      <img 
+                        src={p.avatar || '/avatar1.svg'} 
+                        alt={`${p.username}'s avatar`} 
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          // Fallback ke avatar lokal jika gagal
+                          const fallbackAvatars = ['/avatar1.svg', '/avatar2.svg', '/avatar3.svg', '/avatar4.svg', '/avatar5.svg', '/avatar6.svg'];
+                          const randomIndex = Math.floor(Math.random() * fallbackAvatars.length);
+                          e.target.src = fallbackAvatars[randomIndex];
+                        }}
+                      />
+                    </div>
                     <span className="player-name" style={{color:'yellow'}}>{p.username} {p.isHost && '👑'}</span>
                   </div>
                 ))}

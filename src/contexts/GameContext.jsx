@@ -1,5 +1,5 @@
 // Hapus ekspor useGame dari file ini
-import { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 
@@ -33,7 +33,7 @@ export const GameProvider = ({ children }) => {
     }
 
     console.log('Creating new socket connection');
-    const newSocket = io(import.meta.env.VITE_SERVER_URL || 'https://gp-phase2.rahmadamri.site', {
+    const newSocket = io(import.meta.env.VITE_SERVER_URL || 'http://localhost:3000', {
       reconnection: true,
       reconnectionAttempts: 5,
       reconnectionDelay: 1000,
